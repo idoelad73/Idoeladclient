@@ -31,6 +31,11 @@ const Login = () => {
       return res.data;
     },
     onSuccess: (data) => {
+      console.log('data',data)
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+    
       loginGlobal(data.user || data);
       clearCart();
       navigate("/about");

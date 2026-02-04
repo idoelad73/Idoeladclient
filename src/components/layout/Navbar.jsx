@@ -16,14 +16,20 @@ export default function Navbar() {
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
+      
       // Using relative path to work with your Vite Proxy
       return await axios.post('/ido_shop_api/auth/logout');
+      { withCredentials: true }
     },
     onSuccess: () => {
+      localStorage.removeItem("token");
+      console.log('token removed');
       logoutLocal();
       navigate('/login');
     },
     onError: (error) => {
+      localStorage.removeItem("token");
+      console.log('token removed');
       console.error('Logout failed:', error);
       logoutLocal(); // Still clear local state for safety
       navigate('/login');
