@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import Layout from "./Layout";
+import RootLayout from "./RootLayout";
 
 const About = lazy(() => import("../components/pages/about/About"));
 const Register = lazy(() => import("../components/pages/Register"));
@@ -21,6 +22,7 @@ const AddressPhoneFormModal = lazy(() => import("../components/pages/login/Adres
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
     <Route path="/" element={<Layout />}>
       <Route index element={<About />} />
       <Route path="about" element={<About />} />
@@ -39,6 +41,7 @@ export const router = createBrowserRouter(
       <Route path="/checkout/contact" element={<AddressPhoneFormModal />} />
 
 
+    </Route>
     </Route>
   )
 );

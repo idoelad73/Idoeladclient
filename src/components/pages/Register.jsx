@@ -151,7 +151,7 @@ const Register = () => {
 
             {/* Address */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Shipping Address(min 10 characters)</label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
                 <textarea
@@ -167,7 +167,7 @@ const Register = () => {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Password(min 8 characters)</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                 <input
