@@ -171,16 +171,16 @@ export default function OpenSupportPage() {
 
               {/* User ID */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">
+                {/* <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">
                   <Hash size={16} className="text-purple-500" />
-                  User ID
-                </label>
-                <input
+                  User ID */}
+                {/* </label> */}
+                {/* <input
                   type="text"
                   value={user?._id || 'N/A'}
                   readOnly
                   className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-2xl text-gray-400 font-mono text-xs cursor-not-allowed"
-                />
+                /> */}
               </div>
             </div>
 
