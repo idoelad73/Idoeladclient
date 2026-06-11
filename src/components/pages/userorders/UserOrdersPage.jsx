@@ -60,7 +60,7 @@ export default function UserOrdersPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-3 sm:p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -71,14 +71,15 @@ export default function UserOrdersPage() {
             <ArrowLeft size={20} /> Back to Products
           </button>
 
-          <div className="bg-white rounded-3xl shadow-2xl p-8 border border-indigo-100">
+          <div className="bg-white rounded-3xl shadow-2xl p-5 sm:p-8 border border-indigo-100">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
-                <ShoppingBag size={32} className="text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                <ShoppingBag size={24} className="text-white sm:hidden" />
+                <ShoppingBag size={32} className="text-white hidden sm:block" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">Orders for {user?.user_name}</h1>
-                <p className="text-gray-500 mt-1">Found {orders?.length || 0} orders in your history</p>
+                <h1 className="text-xl sm:text-3xl font-bold text-gray-800">Orders for {user?.user_name}</h1>
+                <p className="text-gray-500 mt-1 text-sm sm:text-base">Found {orders?.length || 0} orders in your history</p>
               </div>
             </div>
           </div>
@@ -90,8 +91,8 @@ export default function UserOrdersPage() {
             orders.map((order) => (
               <div key={order._id} className="bg-white rounded-3xl shadow-xl overflow-hidden border border-indigo-100">
                 {/* Order Header */}
-                <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-6 text-white">
-                  <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-4 sm:p-6 text-white">
+                  <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-3">
                       <Package size={24} />
                       <div>
@@ -113,13 +114,15 @@ export default function UserOrdersPage() {
                 </div>
 
                 {/* Order Details */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="mb-6">
                     <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                       <Package size={20} className="text-indigo-500" />
                       Products
                     </h3>
-                    <div className="overflow-x-auto rounded-2xl border border-gray-200">
+
+                    {/* Desktop table */}
+                    <div className="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200">
                       <table className="w-full">
                         <thead className="bg-gradient-to-r from-indigo-50 to-purple-50">
                           <tr>
@@ -134,9 +137,8 @@ export default function UserOrdersPage() {
                             <tr key={item._id} className="border-t border-gray-200 hover:bg-gray-50 transition-colors">
                               <td className="p-4">
                                 <div className="flex items-center gap-3">
-                                  {/* Handling potential missing product data due to populate */}
-                                  <img 
-                                    src={item.product_id?.images || 'https://via.placeholder.com/150'} 
+                                  <img
+                                    src={item.product_id?.images || 'https://via.placeholder.com/150'}
                                     alt={item.product_id?.title}
                                     className="w-16 h-16 object-cover rounded-xl border border-gray-200 shadow-sm"
                                   />
@@ -160,6 +162,27 @@ export default function UserOrdersPage() {
                         </tbody>
                       </table>
                     </div>
+
+                    {/* Mobile card layout */}
+                    <div className="sm:hidden space-y-3">
+                      {order.products.map((item) => (
+                        <div key={item._id} className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors">
+                          <img
+                            src={item.product_id?.images || 'https://via.placeholder.com/150'}
+                            alt={item.product_id?.title}
+                            className="w-14 h-14 object-cover rounded-xl border border-gray-200 flex-shrink-0"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold text-gray-800 text-sm leading-tight truncate">{item.product_id?.title || 'Unknown Product'}</p>
+                            <p className="text-xs text-gray-500 mt-0.5">{item.product_id?.brand || 'Store Item'}</p>
+                            <p className="text-xs text-gray-600 mt-1">Qty: {item.quantity} × ${item.product_rtp.toFixed(2)}</p>
+                          </div>
+                          <p className="font-bold text-indigo-600 text-sm flex-shrink-0">
+                            ${(item.product_rtp * item.quantity).toFixed(2)}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Summary grid */}
@@ -177,7 +200,7 @@ export default function UserOrdersPage() {
 
                     <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-5 border border-indigo-100 flex flex-col justify-center items-end">
                       <span className="text-gray-600 font-semibold mb-1">Total Paid</span>
-                      <span className="text-3xl font-bold text-indigo-600">
+                      <span className="text-2xl sm:text-3xl font-bold text-indigo-600">
                         ${order.total_price.toFixed(2)}
                       </span>
                     </div>

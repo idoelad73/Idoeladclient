@@ -93,57 +93,56 @@ const handleCartAction = () => {
     const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercentage);
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-            <div className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-3xl shadow-2xl overflow-y-auto overflow-x-hidden">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+            <div className="relative w-full max-w-5xl max-h-[95vh] sm:max-h-[90vh] bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-y-auto overflow-x-hidden">
 
                 <button
                     onClick={() => navigate(-1)}
-                    className="absolute top-6 right-6 z-10 p-2 bg-white/80 hover:bg-gray-100 rounded-full transition-colors shadow-sm"
+                    className="sticky top-4 float-right mr-4 z-10 p-2 bg-white/90 hover:bg-gray-100 rounded-full transition-colors shadow-sm"
                 >
-                    <X className="w-6 h-6 text-gray-500" />
+                    <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
                 </button>
 
-                <div className="grid md:grid-cols-2 gap-8 p-6 lg:p-10">
-                    <div className="relative bg-gray-50 rounded-2xl flex items-center justify-center aspect-square md:aspect-auto md:h-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 p-4 sm:p-6 lg:p-10 pt-8 sm:pt-6">
+                    <div className="relative bg-gray-50 rounded-2xl flex items-center justify-center aspect-square md:aspect-auto md:min-h-[300px]">
                         <img
                             src={product.images}
                             alt={product.title}
-                            className="w-full h-full object-contain p-6"
+                            className="w-full h-full object-contain p-4 sm:p-6 max-h-64 sm:max-h-none"
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <div className="mb-4">
+                        <div className="mb-3 sm:mb-4">
                             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase">
                                 {product.category}
                             </span>
                             <p className="text-gray-500 text-sm mt-2">Brand: {product.brand}</p>
                         </div>
 
-                        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{product.title}</h1>
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">{product.title}</h1>
 
-                        <div className="flex items-center gap-2 mb-6">
+                        <div className="flex items-center gap-2 mb-4 sm:mb-6">
                             <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                             <span className="font-bold">{product.rating}</span>
                             <span className="text-gray-400 ml-4">Stock: {product.stock} available</span>
                         </div>
 
-                        <div className="mb-6 pb-6 border-b">
+                        <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b">
                             <div className="flex items-baseline gap-3">
-                                <span className="text-4xl font-bold text-gray-900">${discountedPrice}</span>
+                                <span className="text-3xl sm:text-4xl font-bold text-gray-900">${discountedPrice}</span>
                                 {product.discountPercentage > 0 && (
-                                    <span className="text-xl text-gray-400 line-through">${product.price.toFixed(2)}</span>
+                                    <span className="text-lg sm:text-xl text-gray-400 line-through">${product.price.toFixed(2)}</span>
                                 )}
                             </div>
                         </div>
 
-                        <p className="text-gray-600 mb-8 leading-relaxed">{product.description}</p>
+                        <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">{product.description}</p>
 
                         <div className="flex gap-4 mt-auto">
-                            {/* --- UPDATED BUTTON --- */}
                             <button
                                 onClick={handleCartAction}
-                                className={`flex-1 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow-lg ${isAuthenticated
+                                className={`flex-1 py-3 sm:py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow-lg ${isAuthenticated
                                         ? 'bg-gray-900 text-white hover:bg-blue-600'
                                         : 'bg-red-600 text-white hover:bg-red-700'
                                     }`}
@@ -162,7 +161,7 @@ const handleCartAction = () => {
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-3 mt-8">
+                        <div className="grid grid-cols-3 gap-3 mt-6 sm:mt-8">
                             <div className="text-center p-3 bg-gray-50 rounded-xl">
                                 <Truck className="w-5 h-5 mx-auto mb-1 text-blue-600" />
                                 <p className="text-[9px] font-bold">FREE SHIPPING</p>

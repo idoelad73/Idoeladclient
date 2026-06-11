@@ -210,8 +210,8 @@ export default function OrderSummary() {
     // UI
     // ===============================
     return (
-        <div className="min-h-screen bg-slate-50 pb-20">
-            <div className="max-w-4xl mx-auto px-4 pt-8">
+        <div className="min-h-screen bg-slate-50 pb-16 sm:pb-20">
+            <div className="max-w-4xl mx-auto px-3 sm:px-4 pt-6 sm:pt-8">
 
                 {/* Back Button */}
                 <button
@@ -227,21 +227,22 @@ export default function OrderSummary() {
                 <div className="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-gray-100">
 
                     {/* Header */}
-                    <div className="bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 p-10 text-white">
+                    <div className="bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 p-6 sm:p-10 text-white">
                         <div className="flex justify-between items-start">
                             <div>
-                                <h2 className="text-5xl font-black mb-2">
+                                <h2 className="text-3xl sm:text-5xl font-black mb-2">
                                     Checkout
                                 </h2>
-                                <p className="opacity-80 text-lg">
+                                <p className="opacity-80 text-base sm:text-lg">
                                     Hi {user?.user_name}, let's finalize your order.
                                 </p>
                             </div>
-                            <Package size={60} className="opacity-20" />
+                            <Package size={40} className="opacity-20 sm:hidden" />
+                            <Package size={60} className="opacity-20 hidden sm:block" />
                         </div>
                     </div>
 
-                    <div className="p-8 md:p-12">
+                    <div className="p-4 sm:p-8 md:p-12">
 
                         {/* Shipping & Contact Info */}
                         <div className="grid md:grid-cols-2 gap-6 mb-12">
@@ -274,16 +275,16 @@ export default function OrderSummary() {
                                 {cartItems.map(item => (
                                     <div
                                         key={item._id}
-                                        className="flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 transition-all"
+                                        className="flex items-center justify-between p-3 sm:p-4 rounded-2xl hover:bg-gray-50 transition-all"
                                     >
-                                        <div className="flex items-center gap-5">
+                                        <div className="flex items-center gap-3 sm:gap-5 min-w-0">
                                             <img
                                                 src={item.image}
                                                 alt={item.title}
-                                                className="w-20 h-20 rounded-2xl object-cover"
+                                                className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl object-cover flex-shrink-0"
                                             />
-                                            <div>
-                                                <p className="font-bold text-lg">
+                                            <div className="min-w-0">
+                                                <p className="font-bold text-base sm:text-lg truncate">
                                                     {item.title}
                                                 </p>
                                                 <p className="text-sm text-gray-500">
@@ -291,7 +292,7 @@ export default function OrderSummary() {
                                                 </p>
                                             </div>
                                         </div>
-                                        <p className="font-black text-xl">
+                                        <p className="font-black text-base sm:text-xl ml-2 flex-shrink-0">
                                             ${(item.price * item.qty).toFixed(2)}
                                         </p>
                                     </div>
@@ -300,12 +301,12 @@ export default function OrderSummary() {
                         </div>
 
                         {/* Footer */}
-                        <div className="bg-gray-900 rounded-[2rem] p-8 text-white flex flex-col md:flex-row justify-between items-center gap-8">
-                            <div>
+                        <div className="bg-gray-900 rounded-[2rem] p-5 sm:p-8 text-white flex flex-col md:flex-row justify-between items-center gap-5 sm:gap-8">
+                            <div className="text-center md:text-left">
                                 <p className="text-gray-400 uppercase text-xs font-black">
                                     Total Payable
                                 </p>
-                                <p className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+                                <p className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
                                     ${totalPrice.toFixed(2)}
                                 </p>
                             </div>
@@ -313,7 +314,7 @@ export default function OrderSummary() {
                             <button
                                 onClick={handleFinalSubmit}
                                 disabled={isPending}
-                                className={`px-12 py-5 rounded-2xl font-black text-xl transition-all
+                                className={`w-full md:w-auto px-8 sm:px-12 py-4 sm:py-5 rounded-2xl font-black text-lg sm:text-xl transition-all
                                     ${isPending
                                         ? 'bg-gray-600 cursor-not-allowed'
                                         : 'bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90'

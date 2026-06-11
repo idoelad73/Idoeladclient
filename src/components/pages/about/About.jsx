@@ -38,13 +38,13 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-20">
+      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-4 tracking-tight">
+            <h1 className="text-3xl sm:text-5xl font-bold mb-4 tracking-tight">
               Welcome to Crazy Shopping! 🛍️
             </h1>
-            <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl text-indigo-100 max-w-3xl mx-auto">
               Your one-stop destination for everything you need, want, and didn't even know you wanted!
             </p>
           </div>
@@ -53,8 +53,8 @@ export default function About() {
 
       {/* Story Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-16">
-          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600 mb-6">
+        <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 md:p-12 mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600 mb-6">
             Our Story
           </h2>
           <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
@@ -78,7 +78,7 @@ export default function About() {
 
         {/* Features Grid */}
         <div className="mb-16">
-          <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600 mb-12">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600 mb-8 sm:mb-12">
             Why Choose Us?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -103,10 +103,10 @@ export default function About() {
 
         {/* Mission Section */}
         <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl shadow-xl p-8 md:p-12 text-white">
-          <h2 className="text-4xl font-bold mb-6 text-center">
+          <h2 className="text-2xl sm:text-4xl font-bold mb-6 text-center">
             Our Mission
           </h2>
-          <p className="text-xl text-center max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-center max-w-4xl mx-auto leading-relaxed">
             To revolutionize the way people shop online by creating a platform that's not just 
             functional, but fun, exciting, and genuinely crazy about customer satisfaction. We're 
             here to make every shopping experience memorable, every deal incredible, and every 

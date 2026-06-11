@@ -110,11 +110,11 @@ export default function OpenSupportPage() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-6">
-        <div className="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-md border border-indigo-100">
+        <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-2xl text-center max-w-md border border-indigo-100 mx-4 sm:mx-0">
           <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle size={48} />
           </div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Request Sent!</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Request Sent!</h2>
           <p className="text-gray-600 mb-8">
             Thank you, <strong>{user?.user_name}</strong>. Your support request has been sent. 
             Check <strong>{user?.user_email}</strong> for a confirmation email.
@@ -132,28 +132,29 @@ export default function OpenSupportPage() {
 
   // --- Form View ---
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-6 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-4 sm:p-6 flex items-center justify-center">
       <div className="w-full max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-3xl shadow-2xl mb-4">
-            <MessageSquare size={40} className="text-white" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-3xl shadow-2xl mb-4">
+            <MessageSquare size={30} className="text-white sm:hidden" />
+            <MessageSquare size={40} className="text-white hidden sm:block" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Support Center</h1>
-          <p className="text-gray-600">Need help? Send us an email and we'll get back to you.</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-2">Support Center</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Need help? Send us an email and we'll get back to you.</p>
         </div>
 
         {/* Form Card */}
         <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-indigo-100">
-          <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6 flex justify-between items-center">
+          <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-4 sm:p-6 flex justify-between items-center">
             <div>
-              <h2 className="text-2xl font-bold text-white">Contact Us</h2>
-              <p className="text-indigo-100 mt-1">Direct email to our support team</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">Contact Us</h2>
+              <p className="text-indigo-100 mt-1 text-sm sm:text-base">Direct email to our support team</p>
             </div>
-            <Mail className="text-white opacity-40" size={40} />
+            <Mail className="text-white opacity-40 hidden sm:block" size={40} />
           </div>
 
-          <div className="p-8 space-y-6">
+          <div className="p-5 sm:p-8 space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               {/* User Name */}
               <div>

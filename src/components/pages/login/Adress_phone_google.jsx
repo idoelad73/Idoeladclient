@@ -53,7 +53,7 @@ export default function AddressPhoneFormModal() {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
-      <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 animate-fade-in">
+      <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-5 sm:p-8 animate-fade-in">
 
         {/* Close */}
         <button
@@ -64,8 +64,8 @@ export default function AddressPhoneFormModal() {
         </button>
 
         {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-black text-gray-800 mb-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">
             Contact Details
           </h2>
           <p className="text-gray-500">

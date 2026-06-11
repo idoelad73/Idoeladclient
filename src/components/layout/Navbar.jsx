@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, LogOut, Loader2, User, Package } from 'lucide-react'; // Added User and Package icons
+import { ShoppingCart, LogOut, Loader2, User, Package, Menu, X } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuthStore from './UseauthStore';
@@ -13,6 +13,7 @@ export default function Navbar() {
 
   const user = useAuthStore((state) => state.user);
   const logoutLocal = useAuthStore((state) => state.logout);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
@@ -42,13 +43,13 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-white text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
+            <Link to="/" className="text-white text-xl sm:text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
               My Crazy Shop
             </Link>
           </div>
 
-          {/* Navigation Items */}
-          <div className="flex items-center space-x-1">
+          {/* Desktop Navigation Items */}
+          <div className="hidden md:flex items-center space-x-1">
             <Link
               to="/products"
               className="text-white hover:bg-indigo-900 hover:bg-opacity-60 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
@@ -59,7 +60,6 @@ export default function Navbar() {
             {/* LOGGED IN VIEW */}
             {user ? (
               <>
-                {/* NEW: My Orders */}
                 <Link
                   to="/orders"
                   className="flex items-center text-white hover:bg-indigo-900 hover:bg-opacity-60 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
@@ -68,7 +68,6 @@ export default function Navbar() {
                   My Orders
                 </Link>
 
-                {/* NEW: User Details / Profile */}
                 <Link
                   to="/profile"
                   className="flex items-center text-white hover:bg-indigo-900 hover:bg-opacity-60 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
@@ -77,7 +76,6 @@ export default function Navbar() {
                   {user.user_name}
                 </Link>
 
-                {/* Logout Button */}
                 <button
                   onClick={() => logoutMutation.mutate()}
                   disabled={logoutMutation.isPending}
@@ -94,7 +92,6 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              /* LOGGED OUT VIEW */
               <>
                 <Link
                   to="/login"
@@ -125,7 +122,6 @@ export default function Navbar() {
               )}
             </Link>
 
-            
             <Link
               to="/support"
               className="text-white hover:bg-indigo-900 hover:bg-opacity-60 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
@@ -133,7 +129,6 @@ export default function Navbar() {
               Support
             </Link>
 
-            {/* ADDED: About Link */}
             <Link
               to="/about"
               className="text-white hover:bg-indigo-900 hover:bg-opacity-60 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
@@ -141,8 +136,105 @@ export default function Navbar() {
               About
             </Link>
           </div>
+
+          {/* Mobile: Cart icon + Hamburger button */}
+          <div className="flex md:hidden items-center gap-1">
+            <Link
+              to="/cart"
+              className="relative text-white p-2 rounded-lg hover:bg-indigo-900 hover:bg-opacity-60"
+            >
+              <ShoppingCart className="h-6 w-6" />
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="text-white p-2 rounded-lg hover:bg-indigo-900 hover:bg-opacity-60"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-indigo-700 px-4 py-3 space-y-1 border-t border-indigo-500">
+          <Link
+            to="/products"
+            onClick={() => setMobileOpen(false)}
+            className="block text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+          >
+            Products
+          </Link>
+
+          {user ? (
+            <>
+              <Link
+                to="/orders"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+              >
+                <Package className="h-4 w-4" /> My Orders
+              </Link>
+              <Link
+                to="/profile"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+              >
+                <User className="h-4 w-4" /> {user.user_name}
+              </Link>
+              <button
+                onClick={() => { setMobileOpen(false); logoutMutation.mutate(); }}
+                disabled={logoutMutation.isPending}
+                className="flex items-center gap-2 w-full text-white bg-red-500 bg-opacity-20 py-2.5 px-3 rounded-lg font-medium border border-red-400 border-opacity-30 hover:bg-opacity-40 transition-colors"
+              >
+                {logoutMutation.isPending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <><LogOut className="h-4 w-4" /> Logout</>
+                )}
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                onClick={() => setMobileOpen(false)}
+                className="block text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setMobileOpen(false)}
+                className="block text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+          <Link
+            to="/support"
+            onClick={() => setMobileOpen(false)}
+            className="block text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+          >
+            Support
+          </Link>
+          <Link
+            to="/about"
+            onClick={() => setMobileOpen(false)}
+            className="block text-white py-2.5 px-3 rounded-lg font-medium hover:bg-indigo-600 transition-colors"
+          >
+            About
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }

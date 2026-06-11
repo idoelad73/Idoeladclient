@@ -93,14 +93,13 @@ export default function OrderPage() {
     
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-6">
+                    <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 sm:p-6">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <ShoppingCart className="text-white" size={32} />
-                                <h1 className="text-3xl font-bold text-white">Your Order</h1>
+                                <ShoppingCart className="text-white" size={28} />
+                                <h1 className="text-2xl sm:text-3xl font-bold text-white">Your Order</h1>
                             </div>
-                            {/* Alternative placement for the button inside the header */}
-                            <button 
+                            <button
                                 onClick={() => navigate('/products')}
                                 className="hidden md:block bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
                             >
@@ -109,7 +108,7 @@ export default function OrderPage() {
                         </div>
                     </div>
     
-                    <div className="p-6">
+                    <div className="p-3 sm:p-6">
                         {cartItems.length === 0 ? (
                             <div className="text-center py-12">
                                 <ShoppingCart size={64} className="mx-auto text-gray-300 mb-4" />
@@ -123,7 +122,9 @@ export default function OrderPage() {
                                 </button>
                             </div>
                         ) : (
-                            <div className="overflow-x-auto">
+                            <>
+                            {/* Desktop table */}
+                            <div className="hidden sm:block overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
                                         <tr className="border-b-2 border-gray-200">
@@ -183,18 +184,57 @@ export default function OrderPage() {
                                     </tbody>
                                 </table>
                             </div>
+
+                            {/* Mobile card layout */}
+                            <div className="sm:hidden space-y-3">
+                                {cartItems.map((item) => (
+                                    <div key={item.cartItemId} className="flex gap-3 p-3 border border-gray-100 rounded-xl hover:bg-purple-50 transition-colors">
+                                        <img src={item.image} alt={item.title} className="w-20 h-20 object-cover rounded-lg flex-shrink-0" />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-medium text-gray-800 text-sm leading-tight">{item.title}</p>
+                                            <p className="text-xs text-gray-500 capitalize mt-0.5">{item.category}</p>
+                                            <p className="text-purple-600 font-semibold text-sm mt-1">${item.price.toFixed(2)}</p>
+                                            <div className="flex items-center gap-2 mt-2">
+                                                <button
+                                                    onClick={() => updateQuantity(item.cartItemId, -1)}
+                                                    className="w-7 h-7 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center disabled:opacity-50"
+                                                    disabled={item.qty <= 1}
+                                                >
+                                                    <Minus size={13} />
+                                                </button>
+                                                <span className="w-6 text-center font-semibold text-sm">{item.qty}</span>
+                                                <button
+                                                    onClick={() => updateQuantity(item.cartItemId, 1)}
+                                                    className="w-7 h-7 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center disabled:opacity-50"
+                                                    disabled={item.qty >= item.stock}
+                                                >
+                                                    <Plus size={13} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-end justify-between">
+                                            <button
+                                                onClick={() => handleDelete(item.cartItemId)}
+                                                className="p-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                            <p className="font-bold text-sm text-gray-800">${(item.price * item.qty).toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            </>
                         )}
-    
+
                         {cartItems.length > 0 && (
                             <div className="mt-8 border-t-2 border-gray-200 pt-6 text-right">
-                                <p className="text-gray-600 text-lg">Total Amount:</p>
-                                <p className="text-4xl font-bold text-purple-600 mb-6">${totalPrice.toFixed(2)}</p>
+                                <p className="text-gray-600 text-base sm:text-lg">Total Amount:</p>
+                                <p className="text-3xl sm:text-4xl font-bold text-purple-600 mb-6">${totalPrice.toFixed(2)}</p>
                                 <div className="flex flex-col md:flex-row justify-end gap-4">
-                                    {/* Secondary back button next to checkout */}
-                                    {/*  */}
                                     <button
                                         onClick={handlePayment}
-                                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-4 px-12 rounded-xl shadow-lg transform hover:scale-105 transition-all"
+                                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-4 px-8 sm:px-12 rounded-xl shadow-lg transform hover:scale-105 transition-all w-full sm:w-auto"
                                     >
                                         Proceed to Payment
                                     </button>
